@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<description 
+bundle="com_msxbits_asmsxvr"
+name="asMSXVR"
+developer="MSX Bits"
+date="22/10/2022" 
+/>
+<application 
+name="src/asmsxvr.pi" 
+/>

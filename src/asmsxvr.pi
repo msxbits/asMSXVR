@@ -1,0 +1,18 @@
+class asMSXVR implements DOS_Program
+{
+    defines:
+        const VERSION =  "0.0.1-beta"
+        const DATE = "2022-10-22"
+
+
+	virtual Start()
+    {
+        _console = GetConsole();
+
+        _console.PrintLn("-------------------------------------------------------------------------------\n");
+        _console.PrintLn(" asMSX v" + VERSION + " MSX cross-assembler. asMSX Team. [" + VERSION + "]\n", VERSION, DATE);
+        _console.PrintLn("-------------------------------------------------------------------------------\n\n");
+
+		End(0);
+    }
+}
