@@ -1,22 +1,75 @@
 class asMSXVR implements DOS_Program
 {
-    CONSTANTS:
+    constants:
         FILE = "code/robots.asm";
         VERSION = "0.0.1-beta";
 
+    properties:
+        verbose = 1;
+        zilog = 0;
+
 	virtual Start()
     {
+        _fileArg = GetParam(GetNumParams() - 1);
+
+        #if YYDEBUG == 1
+            _yydebug = 1;
+        #endif
+
         _console = GetConsole();
 
 		_console.Println("");
         _console.Println("----------------------------------------------");
-        _console.Println(" asMSX - MSX cross-assembler [v" + VERSION + "]");
+        _console.Println(" asMSXVR - MSX cross-assembler [v" + VERSION + "]");
+        _console.Println(" Port based on asMSX Team's cross-assembler ");
         _console.Println("----------------------------------------------");
 		_console.Println("");
 
-		_console.Println(GetNumParams());
-		//_params = GetParam(0);
-		
+        for (option = 0; option < (GetNumParams() -1; option++) 
+        {
+
+            _param = (String_Left(GetParam(option), 2);
+
+            // Zilog compatibility MNEMO_DEC
+            if (_param == "/z" )
+            {
+                zilog = 1
+            } 
+            
+            // Silent
+            else if (_param == "/s")
+            {
+                verbose = 0;
+            }
+
+            // Very verbose
+            else if (String_Left(GetParam(option), 3) == "/vv")
+            {
+                verbose = 2;
+            }
+
+            #if YYDEBUG == 1
+            // DEBUG
+            else if (String_Left(GetParam(option), 3) == "/d")
+            {
+                _yydebug = 1;
+            }            
+            #endif
+            
+            else if (String_Left(GetParam(option), 1) == "/")
+            {
+                _fileArg = 0;
+            }
+        }
+
+        if (_file_Arg <= 0) {
+            #if YYDEBUG == 1
+       		    _console.Println("Syntax: asMSX [/z|/s|/vv/d] [file.asm]");
+            #else
+       		    _console.Println("Syntax: asMSX [/z|/s|/vv] [file.asm]");
+            #endif
+        }
+
         _file = GetEngine().FileOpen(FILE, "FILE_MODE_READ");
         if (!_file) 
         {
