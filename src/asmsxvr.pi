@@ -2,6 +2,7 @@ class asMSXVR implements DOS_Program
 {
     constants:
         VERSION = "0.0.1-beta";
+        DATE = "2022-10-22";
 
     properties:
         verbose = 1;
@@ -19,8 +20,8 @@ class asMSXVR implements DOS_Program
 
 		_console.Println("");
         _console.Println("----------------------------------------------");
-        _console.Println(" asMSXVR - MSX cross-assembler [v" + VERSION + "]");
-        _console.Println(" Port based on asMSX Team's cross-assembler ");
+        _console.Println(" asMSXVR v" + VERSION + " MSX cross-assembler [" + DATE + "]");
+        _console.Println(" Port of asMSX for the MSXVR");
         _console.Println("----------------------------------------------");
 		_console.Println("");
 
