@@ -1,7 +1,6 @@
 class asMSXVR implements DOS_Program
 {
     constants:
-        FILE = "code/robots.asm";
         VERSION = "0.0.1-beta";
 
     properties:
@@ -10,13 +9,13 @@ class asMSXVR implements DOS_Program
 
 	virtual Start()
     {
+        _console = GetConsole();
+
         _fileArg = GetParam(GetNumParams() - 1);
 
         #if YYDEBUG == 1
             _yydebug = 1;
         #endif
-
-        _console = GetConsole();
 
 		_console.Println("");
         _console.Println("----------------------------------------------");
@@ -25,15 +24,15 @@ class asMSXVR implements DOS_Program
         _console.Println("----------------------------------------------");
 		_console.Println("");
 
-        for (option = 0; option < (GetNumParams() -1; option++) 
+        for (option = 0; option < GetNumParams() -1; option++) 
         {
 
-            _param = (String_Left(GetParam(option), 2);
+            _param = String_Left(GetParam(option), 2);
 
             // Zilog compatibility MNEMO_DEC
             if (_param == "/z" )
             {
-                zilog = 1
+                zilog = 1;
             } 
             
             // Silent
@@ -62,7 +61,7 @@ class asMSXVR implements DOS_Program
             }
         }
 
-        if (_file_Arg <= 0) {
+        if (_fileArg == 0) {
             #if YYDEBUG == 1
        		    _console.Println("Syntax: asMSX [/z|/s|/vv/d] [file.asm]");
             #else
@@ -70,14 +69,14 @@ class asMSXVR implements DOS_Program
             #endif
         }
 
-        _file = GetEngine().FileOpen(FILE, "FILE_MODE_READ");
+        _file = GetEngine().FileOpen(_fileArg, "FILE_MODE_READ");
         if (!_file) 
         {
-    		_console.Println("Assembling source file "  + FILE);
+            _console.Println("Fatal: cannot open " + _fileArg);
         } 
         else 
         {
-            _console.Println("Fatal: cannot open " + FILE);
+    		_console.Println("Assembling source file "  + _fileArg);
         }
 
 		End(0);
