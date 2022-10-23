@@ -1,19 +1,30 @@
 class asMSXVR implements DOS_Program
 {
     CONSTANTS:
+        FILE = "code/robots.asm"
         VERSION = "0.0.1-beta";
-        DATE = "2022-10-22";
-
 
 	virtual Start()
     {
         _console = GetConsole();
 
 		_console.Println("");
-        _console.PrintLn("-------------------------------------------------------------------------------\n");
-        _console.PrintLn(" asMSX v" + VERSION + " MSX cross-assembler. asMSX Team. [" + VERSION + "]\n");
-        _console.PrintLn("-------------------------------------------------------------------------------\n\n");
+        _console.PrintLn("----------------------------------------------");
+        _console.PrintLn(" asMSX v" + VERSION + " MSX cross-assembler. [" + VERSION + "]);
+        _console.PrintLn("----------------------------------------------");
+		_console.Println("");
 
-		End(0);
+        _file = FileOpen(FILE, "FILE_MODE_READ");
+        if (_file != null) 
+        {
+    		_console.Println("Assembling source file "  + FILE);
+        } 
+        else 
+        {
+            _console.Println("Fatal: cannot open " + FILE);
+
+        }
+
+		// End(0);
     }
 }
