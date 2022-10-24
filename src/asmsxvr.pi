@@ -62,9 +62,9 @@ class asMSXVR implements DOS_Program
 
         if (!_fileArg || _fileArg == 0) {
             #if YYDEBUG == 1
-       		    _console.Println("Syntax: asMSX [/z|/s|/vv/d] [file.asm]");
+       		    _console.Println("Syntax: asMSXVR [/z|/s|/vv/d] [file.asm]");
             #else
-       		    _console.Println("Syntax: asMSX [/z|/s|/vv] [file.asm]");
+       		    _console.Println("Syntax: asMSXVR [/z|/s|/vv] [file.asm]");
             #endif
         }
 
