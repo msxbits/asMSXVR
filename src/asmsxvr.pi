@@ -18,19 +18,22 @@ class asMSXVR implements DOS_Program
             _yydebug = 1;
         #endif
 
-        _console.Println("------------------------------------------------------");
+		_console.Println("");
+        _console.Println("----------------------------------------------");
         _console.Println(" asMSXVR v" + VERSION + " MSX cross-assembler [" + DATE + "]");
-        _console.Println("------------------------------------------------------");
+        _console.Println(" Port of asMSX for the MSXVR");
+        _console.Println("----------------------------------------------");
 		_console.Println("");
 
         for (option = 0; option < GetNumParams() -1; option++) 
         {
 
-            _param = String_Left(GetParam(option), 3);
+            _param = String_Left(GetParam(option), 2);
 
             // Zilog compatibility MNEMO_DEC
             if (_param == "/z" )
             {
+                
                 zilog = 1;
             } 
             
@@ -41,14 +44,14 @@ class asMSXVR implements DOS_Program
             }
 
             // Very verbose
-            else if (_param == "/vv")
+            else if (String_Left(GetParam(option), 3) == "/vv")
             {
                 verbose = 2;
             }
 
             #if YYDEBUG == 1
             // DEBUG
-            else if (_param == "/d")
+            else if (String_Left(GetParam(option), 3) == "/d")
             {
                 _yydebug = 1;
             }            
@@ -60,24 +63,19 @@ class asMSXVR implements DOS_Program
             }
         }
 
-        if (!_fileArg || _fileArg == 0) {
+        if (_fileArg == 0) {
             #if YYDEBUG == 1
-       		    _console.Println("Syntax: asMSXVR [/z|/s|/vv/d] [file.asm]");
+       		    _console.Println("Syntax: asMSX [/z|/s|/vv/d] [file.asm]");
             #else
-       		    _console.Println("Syntax: asMSXVR [/z|/s|/vv] [file.asm]");
+       		    _console.Println("Syntax: asMSX [/z|/s|/vv] [file.asm]");
             #endif
+
+            End(0);
         }
 
-        _file = GetEngine().FileOpen(_fileArg, "FILE_MODE_READ");
-        if (!_file) 
-        {
-            _console.Println("Fatal: cannot open " + _fileArg);
-        } 
-        else 
-        {
-    		_console.Println("Assembling source file "  + _fileArg);
-        }
+        _lexer = new Lexer(_fileArg);
+        _lexer.lex();
 
-		End(0);
+        End(0);
     }
 }
