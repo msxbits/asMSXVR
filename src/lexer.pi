@@ -1,3 +1,31 @@
 class Lexer {
+    properties:
+        file = null;
+
+    function _operator_new(filename)
+    {
+        file = GetEngine().FileOpen(_fileArg, "FILE_MODE_READ");
+        if (!_file) 
+        {
+            _console.Println("Fatal: cannot open " + _fileArg);
+        } 
+        else 
+        {
+    		_console.Println("Assembling source file "  + _fileArg);
+        }
+    }
+
+    function _operator_delete()
+    {
+
+    }
     
+    function lex(filename)
+    {        
+        while (!file.IsEOF())
+		{
+            _text = file.ReadText();
+            GetConsole().println(_text);
+        }
+    }
 }
