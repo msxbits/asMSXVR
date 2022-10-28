@@ -73,7 +73,8 @@ class asMSXVR implements DOS_Program
             End(0);
         }
 
-        _lexer = new Lexer(_fileArg);
+		_file = GetEngine().FileOpen(_fileArg, FILE_MODE_READ);
+        _lexer = new Lexer(_console, _file);
         _lexer.lex();
 
         End(0);
